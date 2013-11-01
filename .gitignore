@@ -1,0 +1,7 @@
+.DS_Store
+node_modules
+bower_components
+dist
+db.sqlite
+*.log
+*.env

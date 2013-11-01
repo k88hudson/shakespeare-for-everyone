@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="center">
+  <h1>{{LongTitle}}</h1>
+  <ul>
+  {% for chapter in chapters %}
+    <li><a href="/chapter/{{chapter.id}}">Act {{chapter.Act}} Scene {{chapter.Scene}} - {{chapter.Description}}</a></li>
+  {% endfor %}
+  </ul>
+</div>
+{% endblock %}

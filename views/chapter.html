@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h1><a href="/work/{{chapter.work.id}}">{{chapter.work.Title}}</a></h1>
+  <h2>Act {{chapter.Act}}: Scene {{chapter.Scene}}</h2>
+  <h3>{{chapter.Description}}</h3>
+
+  <form class="add-annotation">
+    <textarea placeholder="Create a translation..."></textarea>
+    <p><input type="submit"></p>
+  </form>
+
+  <div data-component="lines">
+  {% for p in paragraphs %}
+    <article>
+      <div data-speaker>{{p.character.CharName}}</div>
+      <div data-text>
+      {% for line in p.PlainText %}
+        <p>{{line}}</p>
+      {% endfor %}
+      </div>
+    </article>
+  {% endfor %}
+  </div>
+{% endblock %}

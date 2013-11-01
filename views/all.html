@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="center">
+  <h1>The Complete Works of Shakespeare</h1>
+
+  <ul class="all-works">
+  {% for work in works %}
+    <li><a href="/work/{{work.id}}">{{work.LongTitle}} ({{work.Date}})</a></li>
+  {% endfor %}
+  </ul>
+</div>
+{% endblock %}

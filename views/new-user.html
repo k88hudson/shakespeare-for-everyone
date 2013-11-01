@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block body %}
+  <h1>New User</h1>
+
+  <form method="POST" action="/user/create">
+    <fieldset>
+      <label for="fullName">Full Name</label>
+      <input name="fullName">
+    </fieldset>
+    <fieldset>
+      <label for="username">Username</label>
+      <input name="username">
+    </fieldset>
+    <fieldset>
+      <label for="fullName">Email</label>
+      <input class="email" name="email" type="hidden" value="{{email}}">
+      <span class="email">{{email}}</span>
+      <button class="login">Login with your email</button>
+      <button class="logout">Logout</button>
+    </fieldset>
+    <input type="submit" value="Submit">
+  </form>
+{% endblock %}
