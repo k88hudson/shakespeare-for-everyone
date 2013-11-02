@@ -2,7 +2,6 @@ module.exports = function(app, db) {
 
   // Create Users
   app.post('/user/create', function(req, res) {
-    console.log(req.body);
     db.User
       .build({
         email: req.body.email,
@@ -36,6 +35,27 @@ module.exports = function(app, db) {
     });
   });
 
+  // Create annotations
+  app.post('/annotation/create', function(req, res) {
+    console.log(req.body);
+    db.Annotation
+      .build({
+        email: req.session.email,
+        PlainText: req.body.PlainText,
+        paragraph_start_id: req.body.paragraph_id
+      })
+      .save()
+      .success(function(annotation) {
+        res.json({
+          status: 'Success',
+          data: annotation
+        });
+      })
+      .error(function(err) {
+        res.send(err);
+      });
+  });
+
   app.get('/chapter/:id', function(req, res) {
     db.Chapter.find({
       where: {
@@ -47,7 +67,7 @@ module.exports = function(app, db) {
         where: {
           chapter_id: chapter.id
         },
-        include: [db.Character]
+        include: [db.Character, db.Annotation]
       }).success(function(paragraphs) {
 
         paragraphs.map(function(item) {

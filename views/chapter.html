@@ -4,19 +4,31 @@
   <h2>Act {{chapter.Act}}: Scene {{chapter.Scene}}</h2>
   <h3>{{chapter.Description}}</h3>
 
-  <form class="add-annotation">
-    <textarea placeholder="Create a translation..."></textarea>
-    <p><input type="submit"></p>
+  <form method="POST" action="/annotation/create" class="add-annotation">
+    <textarea name="PlainText" placeholder="Add some notes..."></textarea>
+    <input name="paragraph_id" type="hidden" value="">
+    <input name="_csrf" type="hidden" value="{{_csrf}}">
+    <input type="submit">
   </form>
 
   <div data-component="lines">
   {% for p in paragraphs %}
     <article>
       <div data-speaker>{{p.character.CharName}}</div>
-      <div data-text>
+      <div data-text data-paragraph-id="{{p.id}}">
       {% for line in p.PlainText %}
         <p>{{line}}</p>
       {% endfor %}
+      {% if p.annotations.length %}
+      <div class="annotation-container">
+        {% for a in p.annotations %}
+        <div data-annotation>
+          <p>{{a.PlainText}}</p>
+          <p>&ndash; {{a.email}}</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
       </div>
     </article>
   {% endfor %}

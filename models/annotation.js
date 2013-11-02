@@ -1,7 +1,9 @@
 module.exports = function( sequelize, DataTypes) {
   return sequelize.define('Annotation', {
-    id: DataTypes.INTEGER,
-    paragraph_start_id: DataTypes.INTEGER,
+    paragraph_start_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     paragraph_end_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
@@ -17,7 +19,7 @@ module.exports = function( sequelize, DataTypes) {
       defaultValue: null
     },
     PlainText: DataTypes.TEXT,
-    user_id: DataTypes.INTEGER,
+    email: DataTypes.STRING,
     locale: {
       type: DataTypes.STRING,
       defaultValue: 'en-US'

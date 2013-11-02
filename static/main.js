@@ -1,3 +1,5 @@
+var _csrf = $('meta[name="_csrf"]').attr('content');
+
 $('.login').on('click', function(e) {
   e.preventDefault();
   navigator.id.request();
@@ -14,6 +16,7 @@ navigator.id.watch({
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/persona/verify", true);
     xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("X-CSRF-Token", _csrf);
     xhr.addEventListener("loadend", function(e) {
       var data = JSON.parse(this.responseText);
       if (data && data.status === "okay") {
@@ -31,6 +34,7 @@ navigator.id.watch({
   onlogout: function() {
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/persona/logout", true);
+    xhr.setRequestHeader("X-CSRF-Token", _csrf);
     xhr.addEventListener("loadend", function(e) {
       $('.logout').addClass('hidden');
       $('.login').removeClass('hidden');
@@ -41,7 +45,15 @@ navigator.id.watch({
   }
 });
 
-
 $('[data-text]').on('click', function() {
-  console.log(this);
+  var top = this.offsetTop;
+  var paragraphId = +this.getAttribute('data-paragraph-id');
+
+  $('.add-annotation').css({
+    'display': 'block',
+    'top': top + 'px'
+  });
+  $('.add-annotation input[name="paragraph_id"]').val(paragraphId);
+  $('[data-text].active').removeClass('active');
+  $(this).addClass('active');
 });

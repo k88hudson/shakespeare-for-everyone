@@ -24,11 +24,11 @@ module.exports = function(database, user, password, logging) {
   Paragraph.belongsTo(Character, {foreignKey: 'character_id'});
   Character.hasMany(Paragraph, {foreignKey: 'character_id'});
 
-  Annotation.hasMany(Paragraph, {foreignKey: 'paragraph_start_id'});
+  Annotation.belongsTo(Paragraph, {foreignKey: 'paragraph_start_id'});
   Paragraph.hasMany(Annotation, {foreignKey: 'paragraph_start_id'});
 
-  Annotation.belongsTo(User, {foreignKey: 'user_id'});
-  User.hasMany(Annotation, {foreignKey: 'user_id'});
+  // Annotation.belongsTo(User, {foreignKey: 'email'});
+  // User.hasMany(Annotation, {foreignKey: 'email'});
 
   // Sync
   sequelize.sync().complete(function (err) {

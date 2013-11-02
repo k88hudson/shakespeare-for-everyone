@@ -28,10 +28,12 @@ app.use(express.cookieSession({
   },
   proxy: true
 }));
+app.use(express.csrf());
 
 app.use(function(req, res, next) {
   res.locals({
-    email: req.session.email || ''
+    email: req.session.email || '',
+    _csrf: req.csrfToken()
   });
   next();
 });

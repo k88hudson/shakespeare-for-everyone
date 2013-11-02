@@ -1,0 +1,14 @@
+{
+  "name": "shakespeare-for-everyone",
+  "version": "0.0.0",
+  "homepage": "https://github.com/k88hudson/shakespeare-for-everyone",
+  "authors": [
+    "Kate Hudson <k88hudson@gmail.com>"
+  ],
+  "dependencies": {
+    "font-awesome": "~3.2.1",
+    "jquery": "~2.0.3",
+    "requirejs": "~2.1.8"
+  }
+}
+
