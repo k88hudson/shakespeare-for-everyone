@@ -1,36 +1,42 @@
 {% extends "layout.html" %}
 {% block body %}
-  <h1><a href="/work/{{chapter.work.id}}">{{chapter.work.Title}}</a></h1>
-  <h2>Act {{chapter.Act}}: Scene {{chapter.Scene}}</h2>
-  <h3>{{chapter.Description}}</h3>
+<!--
+ -->
+  <div class="wrapper">
+    <div id="video"></div>
 
-  <form method="POST" action="/annotation/create" class="add-annotation">
-    <textarea name="PlainText" placeholder="Add some notes..."></textarea>
-    <input name="paragraph_id" type="hidden" value="">
-    <input name="_csrf" type="hidden" value="{{_csrf}}">
-    <input type="submit">
-  </form>
+    <div data-component="lines">
+    <h1><a href="/work/{{chapter.work.id}}">{{chapter.work.Title}}</a></h1>
+    <h2>Act {{chapter.Act}}: Scene {{chapter.Scene}}</h2>
+    <h3>{{chapter.Description}}</h3>
 
-  <div data-component="lines">
-  {% for p in paragraphs %}
-    <article>
-      <div data-speaker>{{p.character.CharName}}</div>
-      <div data-text data-paragraph-id="{{p.id}}">
-      {% for line in p.PlainText %}
-        <p>{{line}}</p>
-      {% endfor %}
-      {% if p.annotations.length %}
-      <div class="annotation-container">
-        {% for a in p.annotations %}
-        <div data-annotation>
-          <p>{{a.PlainText}}</p>
-          <p>&ndash; {{a.email}}</p>
-        </div>
+    {% for p in paragraphs %}
+      <article class="character-{{p.character.Abbrev}}">
+        <div data-text data-paragraph-id="{{p.id}}">
+        <div data-speaker>{{p.character.CharName}}</div>
+        {% for line in p.PlainText %}
+          <div data-line>{{line}}</div data-line>
         {% endfor %}
-      </div>
-      {% endif %}
-      </div>
-    </article>
-  {% endfor %}
+        </div>
+
+        <div data-annotation>
+        <div data-speaker>{{p.character.CharName}}</div>
+        {% if p.annotations.length %}
+          {% for a in p.annotations %}
+            <div data-line>{{a.PlainText}}</div data-line>
+          {% endfor %}
+        {% else %}
+          <form method="POST" action="/annotation/create" class="add-annotation">
+            <textarea name="PlainText" placeholder="Add some notes..."></textarea>
+            <input name="paragraph_id" type="hidden" value="{{p.id}}">
+            <input name="_csrf" type="hidden" value="{{_csrf}}">
+            <input type="submit">
+          </form>
+        {% endif %}
+        </div>
+      </article>
+    {% endfor %}
+    </div>
+
   </div>
 {% endblock %}

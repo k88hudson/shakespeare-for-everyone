@@ -1,0 +1,72 @@
+@fontStack: 'Merriweather', sans-serif;
+@leading: 2rem;
+
+body {
+  position: relative;
+  font-family: @fontStack;
+  padding: 0;
+  margin: 0 auto;
+  font-size: 18px;
+  line-height: @leading;
+  color: #555;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  &:hover {
+    color: #D93B3B;
+    text-decoration: underline;
+  }
+}
+
+ul{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  li {
+  }
+}
+
+/*********************************************************
+* Lines
+*/
+
+article {
+  display: flex;
+}
+
+// Blocks of lines, one per speaker
+[data-text],
+[data-annotation] {
+  width: 50%;
+  padding: 0 @leading @leading;
+}
+// Annotation
+[data-annotation] {
+  background: #111;
+  color: #999;
+}
+
+
+// Title of the speaker
+[data-speaker] {
+  //display: inline-block;
+  font-size: 0.8em;
+  font-weight: 700;
+  color: lighten(#555, 35%);
+}
+
+// Special case: stage directions
+.character-xxx {
+  [data-speaker] {
+    display: none;
+  }
+  font-style: italic;
+  color: lighten(#555, 35%);
+}
+
+// Hide stuff
+.hidden {
+  display: none;
+}

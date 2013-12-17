@@ -64,6 +64,7 @@ module.exports = function(app, db) {
       include: [db.Work]
     }).success(function(chapter) {
       db.Paragraph.findAll({
+        order: 'id',
         where: {
           chapter_id: chapter.id
         },

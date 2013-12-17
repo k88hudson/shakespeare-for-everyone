@@ -3,14 +3,14 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
     less: {
       development: {
-        src: 'less/**/*.less',
+        src: 'less/main.less',
         dest: 'dist/main.css',
         options: {
           dumpLineNumbers: 'comments'
         }
       },
       production: {
-        src: 'less/**/*.less',
+        src: 'less/main.less',
         dest: 'dist/main.css',
         options: {
           yuicompress: true

@@ -1,5 +1,12 @@
 var _csrf = $('meta[name="_csrf"]').attr('content');
 
+
+var p = Popcorn(
+  '#video',
+  ['http://www.youtube.com/watch?v=6i3J17Jp0ag']
+);
+
+
 $('.login').on('click', function(e) {
   e.preventDefault();
   navigator.id.request();
