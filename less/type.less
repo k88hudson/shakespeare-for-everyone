@@ -1,14 +1,22 @@
 @fontStack: 'Merriweather', sans-serif;
+@sans: 'Alegreya Sans', sans-serif;
+@sans-sc: 'Alegreya Sans SC', sans-serif;
 @leading: 2rem;
+
+body,
+html {
+  height: 100%;
+}
 
 body {
   position: relative;
   font-family: @fontStack;
   padding: 0;
   margin: 0 auto;
-  font-size: 18px;
+  font-size: 17px;
   line-height: @leading;
   color: #555;
+  height: 100%;
 }
 
 a {
@@ -28,20 +36,67 @@ ul{
   }
 }
 
+h1, h2, h3, hgroup {
+  font-family: @sans;
+  margin: @leading 0;
+}
+
+hgroup {
+  h1, h2, h3 {
+    margin: 0;
+  }
+  padding-bottom: @leading/2;
+  border-bottom: 1px solid #EEE;
+}
+
+h2 {
+  font-size: 2em;
+  line-height: 2 * @leading;
+}
+
+h3 {
+  font-size: 1.3em;
+}
+
 /*********************************************************
 * Lines
 */
 
+[data-component="lines"] {
+  counter-reset: line;
+}
+
 article {
-  display: flex;
+  position: relative;
+  margin-bottom: @leading;
 }
 
 // Blocks of lines, one per speaker
-[data-text],
-[data-annotation] {
-  width: 50%;
-  padding: 0 @leading @leading;
+[data-text] {
+  //
 }
+
+// A single line
+article:not(.character-xxx) [data-line] {
+  counter-increment: line;
+  position: relative;
+  &:hover:before {
+    color: #555;
+    font-size: 1em;
+  }
+  &:before {
+    transition: font-size 0.2s ease;
+    content: counter(line);
+    color: lighten(#555, 60%);
+    position: absolute;
+    right: 100%;
+    margin-right: 20px;
+    text-align: right;
+    font-size: 0.9em;
+    font-family: @sans;
+  }
+}
+
 // Annotation
 [data-annotation] {
   background: #111;
@@ -51,8 +106,8 @@ article {
 
 // Title of the speaker
 [data-speaker] {
-  //display: inline-block;
-  font-size: 0.8em;
+  font-family: @sans-sc;
+  text-transform: lowercase;
   font-weight: 700;
   color: lighten(#555, 35%);
 }
@@ -62,11 +117,72 @@ article {
   [data-speaker] {
     display: none;
   }
-  font-style: italic;
-  color: lighten(#555, 35%);
+  [data-line] {
+    font-family: @sans;
+    font-style: italic;
+    color: lighten(#555, 35%);
+  }
 }
 
 // Hide stuff
 .hidden {
   display: none;
+}
+
+/*********************************************************
+* NEW STUFF
+*/
+
+
+@navy: #171D1F;
+@lightnavy: #0F3541;
+
+header {
+  padding: @leading/2;
+  background: @navy;
+  color: white;
+  border-bottom: 1px solid #111;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+
+  .ital {
+    font-family: @sans;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    opacity: 0.5;
+  }
+}
+
+// header {
+//   width: 50px;
+//   height: 100px;
+//   overflow: hidden;
+// }
+
+.wrapper {
+  display: flex;
+  min-height: 100%;
+  align-items: stretch;
+}
+
+
+#annotation-sidebar {
+  width: 0;
+  background: #F5F5F5;
+  border-left: 1px solid darken(#F5F5F5, 3%);
+  transition: width 0.2s ease-out;
+  &.expanded {
+    width: 300px;
+  }
+}
+
+#main-body {
+  flex-grow: 1;
+}
+
+.lines-container {
+  padding: 50px 0 0 50px;
+  max-width: 600px;
+  margin: 0 auto;
 }

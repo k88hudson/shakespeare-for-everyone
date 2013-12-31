@@ -3,8 +3,37 @@
 <!--
  -->
   <div class="wrapper">
-    <div id="video"></div>
 
+  <!--   <section id="navigation-sidebar">
+    <a class="learn"><i class="fa fa-home">Home</i></a>
+    </section> -->
+    <section id="main-body">
+      <div id="video"></div>
+      <div class="lines-container" data-component="lines">
+        <hgroup>
+       <!--  <h1><a href="/work/{{chapter.work.id}}">{{chapter.work.Title}}</a></h1> -->
+          <h2>Act {{chapter.Act}}: Scene {{chapter.Scene}}</h2>
+          <h3>{{chapter.Description}}</h3>
+        </hgroup>
+
+        {% for p in paragraphs %}
+          <article class="character-{{p.character.Abbrev}}">
+            <div data-text data-paragraph-id="{{p.id}}">
+            <div data-speaker>{{p.character.CharName}}</div>
+            {% for line in p.PlainText %}
+              <div data-line>{{line}}</div data-line>
+            {% endfor %}
+            </div>
+            <div class="add-annotation-marker">
+              <span class="icon">+</span>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </section>
+    <section id="annotation-sidebar"></section>
+
+<!--
     <div data-component="lines">
     <h1><a href="/work/{{chapter.work.id}}">{{chapter.work.Title}}</a></h1>
     <h2>Act {{chapter.Act}}: Scene {{chapter.Scene}}</h2>
@@ -36,7 +65,7 @@
         </div>
       </article>
     {% endfor %}
-    </div>
+    </div> -->
 
   </div>
 {% endblock %}

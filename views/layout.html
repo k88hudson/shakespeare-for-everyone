@@ -5,16 +5,16 @@
     <meta name="_csrf" content="{{_csrf}}">
     <meta name="email" content="{{email}}">
     <link rel="stylesheet" type="text/css" href="/main.css">
-    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
-
+    <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,700|Alegreya+Sans:400,700,400italic,700italic|Merriweather:400italic,400' rel='stylesheet' type='text/css'>
   </head>
   <body>
 
     <header class="center">
-      <span class="email">{{email}}</span>
+     <!--  <span class="email">{{email}}</span>
       <button class="login{% if email %} hidden{% endif%}">Login with your email</button>
-      <button class="logout{% if not email %} hidden{% endif%}">Logout</button>
-      <a href="/" class="button">Home</a>
+      <button class="logout{% if not email %} hidden{% endif%}">Logout</button> -->
+      <a href="/" class="button">Shakespeare <span class="ital">for</span> Everyone</a>
+
     </header>
 
     {% block body %}{% endblock %}
@@ -22,7 +22,7 @@
     <script src="https://login.persona.org/include.js"></script>
     <script src="/bower_components/jquery/jquery.js"></script>
     <script src="/popcorn.js"></script>
-    <script src="/popcorn.player.js"></script>
+    <script src="/popcorn._MediaElementProto.js"></script>
     <script src="/popcorn.youtube.js"></script>
     <script src="/main.js"></script>
   </body>

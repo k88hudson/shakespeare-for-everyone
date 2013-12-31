@@ -29,27 +29,4 @@ module.exports = function(app, db) {
 
   }
 
-
-  // List all works
-  app.get('/all', function(req, res) {
-    db.Work.findAll().success(function(data) {
-      //res.send(data);
-      res.render('all.html', {
-        works: data
-      });
-    });
-  });
-
-  app.get('/work/:id', function(req, res) {
-    db.Work.find({
-      where: {
-        id: req.params.id
-      },
-      include: [db.Chapter]
-    }).success(function(data) {
-      //res.send(data);
-      res.render('work.html', data);
-    });
-  })
-
 };
