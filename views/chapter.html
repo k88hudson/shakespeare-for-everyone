@@ -7,6 +7,7 @@
   <!--   <section id="navigation-sidebar">
     <a class="learn"><i class="fa fa-home">Home</i></a>
     </section> -->
+    <section id="annotation-sidebar"></section>
     <section id="main-body">
       <div id="video"></div>
       <div class="lines-container" data-component="lines">
@@ -21,17 +22,18 @@
             <div data-text data-paragraph-id="{{p.id}}">
             <div data-speaker>{{p.character.CharName}}</div>
             {% for line in p.PlainText %}
-              <div data-line>{{line}}</div data-line>
+              <div data-line>
+                {{line}}
+                <div class="add-annotation-marker">
+                  <span class="icon">+</span>
+                </div>
+              </div data-line>
             {% endfor %}
-            </div>
-            <div class="add-annotation-marker">
-              <span class="icon">+</span>
             </div>
           </article>
         {% endfor %}
       </div>
     </section>
-    <section id="annotation-sidebar"></section>
 
 <!--
     <div data-component="lines">
